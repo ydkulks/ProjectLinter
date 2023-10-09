@@ -7,4 +7,6 @@ programming language
 ## Todo
 
 - [x] Traverse through a specifed directory
-- [ ] Ignore dot files
+- [x] Ignore dot files
+- [x] Selection option for different kind of projects
+- [ ] Modules for each kind of project
