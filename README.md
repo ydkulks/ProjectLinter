@@ -6,7 +6,7 @@ programming language
 
 ## Project structure
 
-### Javascript (node.js)
+### Javascript and Typescript (node.js)
 
 ```txt
 my-node-app/
@@ -27,6 +27,30 @@ my-node-app/
   ├── .gitignore           (Git ignore rules)
   ├── .env                 (Environment variables, not in version control)
   ├── app.js               (Main application file)
+  ├── README.md            (Documentation)
+
+```
+
+```text
+my-typescript-project/
+  ├── node_modules/        (Dependencies installed via npm or yarn)
+  ├── src/                 (Source code)
+  │   ├── components/      (Reusable UI components)
+  │   ├── containers/      (Higher-level components that manage state)
+  │   ├── services/        (API services, utilities, and helpers)
+  │   ├── styles/          (CSS or SCSS files)
+  │   ├── assets/          (Static assets like images)
+  ├── public/              (Publicly accessible files, e.g., index.html)
+  ├── tests/               (Test files)
+  ├── config/              (Configuration files)
+  │   ├── env/             (Environment-specific configuration)
+  │   ├── constants.ts     (Application constants)
+  │   ├── routes.ts        (Route definitions)
+  ├── typings/             (Custom type definitions, if needed)
+  ├── .gitignore           (Git ignore rules)
+  ├── tsconfig.json        (TypeScript configuration)
+  ├── package.json         (Node.js package configuration)
+  ├── package-lock.json    (Dependency lock file)
   ├── README.md            (Documentation)
 
 ```

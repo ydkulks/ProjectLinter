@@ -4,14 +4,22 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"regexp"
+	// "regexp"
 )
+
+type DirectoryStructure struct{
+	IgnoreDir      []string
+	IgnoreFileType string
+	RootFiles      []string
+	RootDirs       []string
+	Public         string
+}
 
 func JsDirWalk(){
 	// ANSI colors
 	green := "\033[32m"
 	blue := "\033[34m"
-	// yellow := "\033[33m"
+	yellow := "\033[33m"
 	red := "\033[31m"
 	reset := "\033[0m"
 
@@ -19,6 +27,7 @@ func JsDirWalk(){
 	status_ok := green + "✓" + reset
 	status_bad := red + "✗" + reset
 	status_q := blue + "?" + reset
+	status_ignore := yellow + "Ø" + reset
 
 	fmt.Printf("%s Project Directory: ",status_q)
 	var pgr_dir string
@@ -33,45 +42,80 @@ func JsDirWalk(){
 			return err
 		}
 
-		// Ignore folders
-		ignoreDir := [20]string{
-			".git",
-			".next",
-			"node_modules",
-		}
-		ignoreFileType := `\.md$|\.env$|\.local$`
-		ignoreFiles := [20]string{
-			"package.json",
-			"package-lock.json",
-			"LICENSE",
-			"vercel.json",
-			".gitignore",
-			"tsconfig.json",
-			".eslintrc.json",
+		data := DirectoryStructure{
+			IgnoreDir: []string{
+				".git",
+				"node_modules",
+				".next",
+			},
+			RootFiles: []string{
+				"package.json",
+				"package-lock.json",
+				"tailwind.config.js",
+				"tailwind.config.ts",
+				"tsconfig.json",
+				"tslint.json",
+				"webpack.config.js",
+				"yarn.lock",
+				"postcss.config.js",
+				".eslintrc.json",
+				"LICENSE",
+				"README.md",
+				"CODE_OF_CONDUCT.md",
+				".env",
+				".env.local",
+				".gitignore",
+				"app.js",
+			},
+			RootDirs: []string{
+				"public",
+				"src",
+				"tests",
+				"config",
+				"typings",
+			},
 		}
 
-		regex, err1 := regexp.Compile(ignoreFileType)
-		if err1 != nil {return err1}
-		if regex.MatchString(path) && !info.IsDir(){
-			fmt.Printf("%s Ignored file extensions: %q\n",status_bad,path)
-			return nil
-		}
-
-		for i:=0; i <=len(ignoreFiles)-1; i++{
-			if !info.IsDir() && info.Name() == ignoreFiles[i]{
-				fmt.Printf("%s Skipped file: %q\n",status_bad,path)
-				return nil
+		// Root files
+		for i:=0; i <=len(data.RootFiles)-1; i++{
+			if !info.IsDir() && info.Name() == data.RootFiles[i]{
+				if filepath.Dir(path) == pgr_dir{
+					fmt.Printf("%s Root: %q\n",status_ok,path)
+					return nil
+				}else{
+					fmt.Printf("%s FILE NOT IN ROOT: %q\n",status_bad,path)
+					return nil
+				}
 			}
 		}
 
-		for i:=0; i <= len(ignoreDir)-1; i++ {
-			if info.IsDir() && info.Name() == ignoreDir[i] {
-				fmt.Printf("%s Skipped directory: %q\n",status_bad,path)
+		// Root directory folders
+		for i:=0; i <=len(data.RootDirs)-1; i++{
+			if info.IsDir() && info.Name() == data.RootDirs[i]{
+				if filepath.Dir(path) == pgr_dir{
+					fmt.Printf("%s Root directory: %q\n",status_ok,path)
+					return nil
+				}else{
+					fmt.Printf("%s FOLDER NOT IN ROOT: %q\n",status_bad,path)
+					return nil
+				}
+			}
+		}
+
+		// Ignore directory
+		for i:=0; i <= len(data.IgnoreDir)-1; i++ {
+			if info.IsDir() && info.Name() == data.IgnoreDir[i] {
+				fmt.Printf("%s Skipped directory: %q\n",status_ignore,path)
 				return filepath.SkipDir
 			}
 		}
 
-		fmt.Printf("%s Other file: %q\n",status_ok,path)
+		// Other files and directories
+		if info.IsDir() {
+			fmt.Printf("%s Other directory: %q\n",status_q,path)
+		}else{
+			fmt.Printf("%s Other file: %q\n",status_q,path)
+		}
 		return nil
 	})
 
