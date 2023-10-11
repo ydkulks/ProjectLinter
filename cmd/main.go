@@ -6,7 +6,14 @@ import (
 )
 
 func main(){
-	options := []string{"Javascript", "PHP", "Go", "Lua (Plugin)","Other"}
+	options := []string{
+		"Javascript", 
+		"PHP", 
+		"Go (Web app)", 
+		"Go (CLI)", 
+		"Lua (Plugin)",
+		"Other",
+	}
 
   var selectedOption string
 
@@ -19,5 +26,5 @@ func main(){
   // Ask the user to select an option
   survey.AskOne(prompt, &selectedOption)
 
-	prg_struct.DirWalk(selectedOption)
+	prg_struct.ProjectStructure(selectedOption)
 }

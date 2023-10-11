@@ -145,3 +145,5 @@ my-neovim-plugin/
   - [ ] Go (CLI)
   - [ ] PHP (Web app)
   - [ ] Lua (Neovim plugin)
+  - [ ] Other
+- [ ] Sub directory file type validation
