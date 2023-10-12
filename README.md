@@ -140,10 +140,10 @@ my-neovim-plugin/
 - [x] Selection option for different kind of projects
 - [x] Restructure this project based on common convention
 - [ ] Modules for each kind of project
-  - [ ] JavaScript (node.js)
-  - [ ] Go (Web app)
-  - [ ] Go (CLI)
-  - [ ] PHP (Web app)
-  - [ ] Lua (Neovim plugin)
+  - [x] JavaScript (node.js)
+  - [x] Go (Web app)
+  - [x] Go (CLI)
+  - [x] PHP (Web app)
+  - [x] Lua (Neovim plugin)
   - [ ] Other
-- [ ] Sub directory file type validation
+- [x] Sub directory file type validation

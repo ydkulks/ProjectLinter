@@ -5,10 +5,10 @@ import "fmt"
 // Global custom type
 type DirectoryStructure struct{
 	IgnoreDir      []string
-	IgnoreFileType string
 	RootFiles      []string
 	RootDirs       []string
-	Public         string
+	NonRootFiles   []string
+	NonRootDirs    []string
 }
 
 // Global variables
@@ -69,6 +69,30 @@ func ProjectStructure(prg_type string){
 				"config",
 				"typings",
 			},
+			NonRootFiles: []string{
+				// JS
+				"config/database.js",
+				"config/routes.js",
+				"config/environment.js",
+				// TS
+				"config/constants.ts",
+				"config/routes.ts",
+			},
+			NonRootDirs: []string{
+				// JS
+				"src/controllers",
+				"src/models",
+				"src/routes",
+				"src/views",
+				// TS
+				"src/components",
+				"src/containers",
+				"src/services",
+				"src/styles",
+				"src/assets",
+				"config/env",
+				"config/",
+			},
 		}
 		DirWalk(data)
 		return
@@ -79,6 +103,8 @@ func ProjectStructure(prg_type string){
 				".git",
 			},
 			RootFiles: []string{
+				"composer.json",
+				"composer.lock",
 				"LICENSE",
 				"README.md",
 				"CODE_OF_CONDUCT.md",
@@ -87,6 +113,21 @@ func ProjectStructure(prg_type string){
 				".gitignore",
 			},
 			RootDirs: []string{
+				"app",
+				"config",
+				"public",
+				"resources",
+				"routes",
+				"tests",
+				"vendor",
+			},
+			NonRootFiles: []string{
+				"config/database.php",
+			},
+			NonRootDirs: []string{
+				"app/Controllers",
+				"app/Models",
+				"app/Views",
 			},
 		}
 		DirWalk(data)
@@ -108,6 +149,21 @@ func ProjectStructure(prg_type string){
 				".gitignore",
 			},
 			RootDirs: []string{
+				"assets",
+				"templates",
+				"cmd",
+				"internal",
+				"pkg",
+				"vendor",
+			},
+			NonRootFiles: []string{
+				"cmd/main.go",
+			},
+			NonRootDirs: []string{
+				"internal/handlers",
+				"internal/models",
+				"internal/middleware",
+				"internal/config",
 			},
 		}
 		DirWalk(data)
@@ -134,6 +190,12 @@ func ProjectStructure(prg_type string){
 				"pkg",
 				"vendor",
 			},
+			NonRootFiles: []string{
+				"cmd/mycli/main.go",
+			},
+			NonRootDirs: []string{
+				"cmd/mycli",
+			},
 		}
 		DirWalk(data)
 		return
@@ -155,11 +217,19 @@ func ProjectStructure(prg_type string){
 				"doc",
 				"tests",
 			},
+			NonRootFiles: []string{
+				"lua/commands.lua",
+				"lua/mappings.lua",
+				"lua/utils.lua",
+			},
+			NonRootDirs: []string{
+			},
 		}
 		DirWalk(data)
 		return
 	}
 	if prg_type == "Other"{
+		// Take input for file structure
 		return
 	}
 }
