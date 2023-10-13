@@ -147,3 +147,4 @@ my-neovim-plugin/
   - [x] Lua (Neovim plugin)
   - [ ] Other
 - [x] Sub directory file type validation
+- [ ] Restrict file types in a specific directory
