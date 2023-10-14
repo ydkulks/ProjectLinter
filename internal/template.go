@@ -15,7 +15,7 @@ func DirWalk(data DirectoryStructure){
 	for _, pattern := range data.NonRootFiles {
 		re, err := regexp.Compile(pattern)
 		if err != nil{
-			fmt.Println(err)
+			fmt.Println(red + "%s\n" + reset,err)
 			continue
 		}
 		fileRegexPatterns = append(fileRegexPatterns, re)
@@ -23,7 +23,7 @@ func DirWalk(data DirectoryStructure){
 	for _, pattern := range data.NonRootDirs {
 		re, err := regexp.Compile(pattern)
 		if err != nil{
-			fmt.Println(err)
+			fmt.Println(red + "%s\n" + reset,err)
 			continue
 		}
 		dirRegexPatterns = append(dirRegexPatterns, re)
@@ -32,7 +32,7 @@ func DirWalk(data DirectoryStructure){
 	// Path walk
 	error := filepath.Walk(Pgr_dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			fmt.Printf("\nError: %v\n", err)
+			fmt.Println(red + "%s\n" + reset,err)
 			return err
 		}
 

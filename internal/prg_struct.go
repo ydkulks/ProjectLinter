@@ -1,9 +1,7 @@
 package prg_struct
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
 )
 
 // Global custom type
@@ -37,7 +35,7 @@ func ProjectStructure(prg_type string){
 	fmt.Printf("%s Project Directory: ",status_q)
 	_,err := fmt.Scan(&Pgr_dir)
 	if err != nil {
-		fmt.Printf("\n%s Error: %v\n",status_bad,err)
+		fmt.Printf(red + "%s\n" + reset,err)
 	}
 
 	if prg_type == "Javascript"{
@@ -243,36 +241,5 @@ func ProjectStructure(prg_type string){
 		// Take input for file structure
 		addFilesAndDirs(data)
 		return
-	}
-}
-
-func addFilesAndDirs(data DirectoryStructure){
-	// Store the data in a file for later use
-	// If file is not available, then ask for user input
-
-	// Check if save file exists or not
-	if _,err := os.Stat("structure.json"); os.IsNotExist(err){
-		fmt.Println("\033[31m" + "save file does not exist" + "\033[0m")
-	}else{
-		// fmt.Println("save file exist")
-		file, err := os.Open("structure.json")
-		if err != nil {fmt.Println(err)}
-		defer file.Close()
-
-		// var data DirectoryStructure
-		decoder := json.NewDecoder(file)
-		if err := decoder.Decode(&data); err!=nil {fmt.Println(err)}
-	}
-
-	// Add survey options to select the arrays under data
-	for{
-		fmt.Printf("%s Add file or folder (q to quit): ",status_q)
-		var userData string
-		_,err := fmt.Scan(&userData)
-		if err != nil {fmt.Println(err)}
-		if userData == "q"{break}else{
-			data.IgnoreDir = append(data.IgnoreDir, userData)
-			fmt.Println(data.IgnoreDir)
-		}
 	}
 }
