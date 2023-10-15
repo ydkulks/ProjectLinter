@@ -1,10 +1,11 @@
 package prg_struct
 
 import (
-	"github.com/AlecAivazis/survey/v2"
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/AlecAivazis/survey/v2"
 )
 
 func addFilesAndDirs(data DirectoryStructure){
@@ -62,6 +63,30 @@ func addFilesAndDirs(data DirectoryStructure){
 			fmt.Println(*selected)
 		}
 	}
+	updateJSON(data)
+}
+
+func updateJSON(data DirectoryStructure){
 	// If data != structure.json > update json
 	// Display, add and modify json using CLI
+
+	// Read JSON file
+	jsonData , err := os.ReadFile("structure.json")
+	if err != nil {fmt.Println(red + "%s\n" + reset,err)}
+
+	// Unmarshal JSON
+	fileData := data
+	err = json.Unmarshal(jsonData, &fileData)
+
+	// Update JSON
+	// updatedJSON, err := json.MarshalIndent(fileData, "", " ")
+	updatedJSON, err := json.MarshalIndent(data, "", " ")
+	if err != nil {fmt.Println(red + "%s\n" + reset,err)}
+
+	// Write JSON file
+	err = os.WriteFile("structure.json", updatedJSON, 0644)
+	if err != nil {fmt.Println(red + "%s\n" + reset,err)}
+
+	fmt.Println(green + "Updated and saved" + reset)
+	fmt.Println(data)
 }

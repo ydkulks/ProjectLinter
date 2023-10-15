@@ -1,7 +1,13 @@
 {
-	"IgnoreDir": ["LICENSE"],
-	"RootFiles": [],
-	"RootDirs": [],
-	"NonRootFiles": [],
-	"NonRootDirs": []
+ "IgnoreDir": [
+  ".git",
+  "node_modules"
+ ],
+ "RootFiles": [
+  "LICENSE",
+  ".gitignore"
+ ],
+ "RootDirs": [],
+ "NonRootFiles": [],
+ "NonRootDirs": []
 }
