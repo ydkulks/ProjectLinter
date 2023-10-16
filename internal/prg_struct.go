@@ -239,7 +239,8 @@ func ProjectStructure(prg_type string){
 			NonRootDirs: []string{},
 		}
 		// Take input for file structure
-		addFilesAndDirs(data)
+		updatedData := addFilesAndDirs(data)
+		DirWalk(updatedData)
 		return
 	}
 }
