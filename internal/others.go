@@ -53,21 +53,21 @@ func addFilesAndDirs(data DirectoryStructure) (DirectoryStructure){
 		if selectedOption == "Quit"{break}
 
 		// Select operation
-		options = []string{
+		operationOptions := []string{
 			"Add",
 			"Delete",
 			"Display",
 		}
 		prompt = &survey.Select{
 			Message: "Operation: ",
-			Options: options,
+			Options: operationOptions,
 		}
 		survey.AskOne(prompt,&selectedOption)
 
 		if selectedOption == "Add"{
 			// Add
 			for{
-				fmt.Printf("%s Add file or folder (m - menu): ",status_q)
+				fmt.Printf("%s Add file or folder "+green+"(m - menu): "+reset,status_q)
 				var userData string
 				_,err := fmt.Scan(&userData)
 				if err != nil {fmt.Println(red + "%s\n" + reset,err)}
@@ -77,23 +77,32 @@ func addFilesAndDirs(data DirectoryStructure) (DirectoryStructure){
 					fmt.Println(*selected)
 				}
 			}
+			updateJSON(data)
 		}else if selectedOption == "Delete"{
 			// Delete
-			fmt.Println("Delete option selected")
+			deleteOptions := *selected
+			prompt = &survey.Select{
+				Message: "Select File or Dir to delete: ",
+				Options: deleteOptions,
+			}
+			survey.AskOne(prompt,&selectedOption)
+			fmt.Println("Selected item to delete: ",selectedOption)
+
 			var tempArray []string
 			for _,value := range *selected{
-				if value != ".git"{
+				if value != selectedOption{
 					tempArray = append(tempArray, value)
 				}
 			}
 			*selected = tempArray
-			fmt.Println(*selected)
+			fmt.Println("Current list:",*selected)
+			updateJSON(data)
 		}else if selectedOption == "Display"{
 			// Display
-			fmt.Println(data)
+			fmt.Println(*selected)
 		}
 	}
-	updateJSON(data)
+	// updateJSON(data)
 	return data
 }
 
