@@ -139,12 +139,13 @@ my-neovim-plugin/
 - [x] Ignore dot files
 - [x] Selection option for different kind of projects
 - [x] Restructure this project based on common convention
-- [ ] Modules for each kind of project
+- [x] Modules for each kind of project
   - [x] JavaScript (node.js)
   - [x] Go (Web app)
   - [x] Go (CLI)
   - [x] PHP (Web app)
   - [x] Lua (Neovim plugin)
-  - [ ] Other
+  - [x] Other
 - [x] Sub directory file type validation
 - [ ] Restrict file types in a specific directory
+- [ ] Make CLI more readable (spaces and colors)
