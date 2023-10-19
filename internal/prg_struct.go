@@ -11,6 +11,7 @@ type DirectoryStructure struct{
 	RootDirs       []string
 	NonRootFiles   []string
 	NonRootDirs    []string
+	DirectoryFileExtensions    map[string]map[string]bool
 }
 
 // Global variables
@@ -94,6 +95,13 @@ func ProjectStructure(prg_type string){
 				"src/assets",
 				"config/env",
 				"config/",
+			},
+			DirectoryFileExtensions: map[string]map[string]bool{
+				"public": {
+					".html":true,
+					".js":true,
+					".css":true,
+				},
 			},
 		}
 		DirWalk(data)

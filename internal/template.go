@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	// "strings"
 )
 
 func DirWalk(data DirectoryStructure){
@@ -27,6 +28,14 @@ func DirWalk(data DirectoryStructure){
 			continue
 		}
 		dirRegexPatterns = append(dirRegexPatterns, re)
+	}
+
+	// Regex for file extension validation
+	dirRegex := regexp.MustCompile(`.*[/\\]public[/\\].*`)
+	allowedExtensions := map[string]bool{
+		".js":  true,
+		".css": true,
+		".html": true,
 	}
 
 	// Path walk
@@ -89,7 +98,18 @@ func DirWalk(data DirectoryStructure){
 		// Other files and directories
 		if info.IsDir() {
 			fmt.Printf("%s Other directory: %q\n",status_q,path)
-		}else{
+		}else if dirRegex.MatchString(path){
+			ext := filepath.Ext(info.Name())
+
+			// Check if the file extension is in the list of allowed extensions
+			if !allowedExtensions[ext] {
+				fmt.Printf("%s File with invalid extension: %q\n", status_bad, path)
+				return nil
+			} else {
+				fmt.Printf("%s Allowed file: %q\n", status_ok, path)
+				return nil
+			}
+		}else if !info.IsDir(){
 			fmt.Printf("%s Other file: %q\n",status_q,path)
 		}
 		return nil
