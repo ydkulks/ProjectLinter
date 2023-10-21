@@ -31,11 +31,32 @@ func DirWalk(data DirectoryStructure){
 	}
 
 	// Regex for file extension validation
-	dirRegex := regexp.MustCompile(`.*[/\\]public[/\\].*`)
-	allowedExtensions := map[string]bool{
-		".js":  true,
-		".css": true,
-		".html": true,
+
+	// dirRegex := regexp.MustCompile(`.*[/\\]public[/\\].*`)
+	// allowedExtensions := map[string]bool{
+	// 	".js":  true,
+	// 	".css": true,
+	// 	".html": true,
+	// }
+
+	// ISSUE: Only the last dir is validated
+	var dirs []string
+	var dirRegex *regexp.Regexp
+	var allowedExtensions map[string]bool
+	flag := 0
+	for dir := range data.DirectoryFileExtensions {
+		dirs = append(dirs, dir)
+
+		// dirRegex := regexp.MustCompile(`.*[/\\]`+dirs[0]+`[/\\].*`)
+		dirRegex = regexp.MustCompile(`.*[/\\]`+dirs[flag]+`[/\\].*`)
+
+		// var allowedExtensions map[string]bool
+		if allowedExtensions == nil {allowedExtensions = make(map[string]bool)}
+		// for i := range data.DirectoryFileExtensions[dirs[0]]{
+		for i := range data.DirectoryFileExtensions[dirs[flag]]{
+			allowedExtensions[i] = true
+		}
+		flag = flag + 1
 	}
 
 	// Path walk

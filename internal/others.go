@@ -32,6 +32,7 @@ func addFilesAndDirs(data DirectoryStructure) (DirectoryStructure){
 			"Directories in Root",
 			"NonRoot files",
 			"NonRoot Directories",
+			"File Extension Validation",
 			"Quit",
 		}
 		arrayMap := map[string]*[]string{
@@ -40,6 +41,7 @@ func addFilesAndDirs(data DirectoryStructure) (DirectoryStructure){
 			"Directories in Root": &data.RootDirs,
 			"NonRoot files": &data.NonRootFiles,
 			"NonRoot Directories": &data.NonRootDirs,
+			"File Extension Validation": &data.NonRootDirs,
 		}
 		prompt := &survey.Select{
 			Message: "Project structure: ",

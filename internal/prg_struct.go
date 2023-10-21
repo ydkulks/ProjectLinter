@@ -102,6 +102,9 @@ func ProjectStructure(prg_type string){
 					".js":true,
 					".css":true,
 				},
+				"src": {
+					".ts":true,
+				},
 			},
 		}
 		DirWalk(data)
@@ -245,6 +248,16 @@ func ProjectStructure(prg_type string){
 			RootDirs: []string{},
 			NonRootFiles: []string{},
 			NonRootDirs: []string{},
+			DirectoryFileExtensions: map[string]map[string]bool{
+				"public": {
+					".html":true,
+					".js":true,
+					".css":true,
+				},
+				"src": {
+					".ts":true,
+				},
+			},
 		}
 		// Take input for file structure
 		updatedData := addFilesAndDirs(data)
