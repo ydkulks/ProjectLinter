@@ -147,5 +147,6 @@ my-neovim-plugin/
   - [x] Lua (Neovim plugin)
   - [x] Other
 - [x] Sub directory file type validation
-- [ ] Restrict file types in a specific directory
+- [x] Restrict file types in a specific directory
+- [ ] Add CLI survey for file extension validation
 - [ ] Make CLI more readable (spaces and colors)

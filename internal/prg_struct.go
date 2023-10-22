@@ -142,6 +142,11 @@ func ProjectStructure(prg_type string){
 				"app/Models",
 				"app/Views",
 			},
+			DirectoryFileExtensions: map[string]map[string]bool{
+				"app/Controllers":{".php":true},
+				"app/Models":{".php":true},
+				"app/Views":{".blade.php":true,".html":true,".twig":true},
+			},
 		}
 		DirWalk(data)
 		return
@@ -178,6 +183,12 @@ func ProjectStructure(prg_type string){
 				"internal/middleware",
 				"internal/config",
 			},
+			DirectoryFileExtensions: map[string]map[string]bool{
+				"assets":{".css":true, ".js":true, ".jpg":true, ".png":true},
+				"templates":{".html":true},
+				"internal":{".go":true},
+				"pkg":{".go":true},
+			},
 		}
 		DirWalk(data)
 		return
@@ -209,6 +220,10 @@ func ProjectStructure(prg_type string){
 			NonRootDirs: []string{
 				"cmd/mycli",
 			},
+			DirectoryFileExtensions: map[string]map[string]bool{
+				"internal":{".go":true},
+				"pkg":{".go":true},
+			},
 		}
 		DirWalk(data)
 		return
@@ -235,7 +250,9 @@ func ProjectStructure(prg_type string){
 				"lua/mappings.lua",
 				"lua/utils.lua",
 			},
-			NonRootDirs: []string{
+			NonRootDirs: []string{},
+			DirectoryFileExtensions: map[string]map[string]bool{
+				"lua":{".lua":true},
 			},
 		}
 		DirWalk(data)
@@ -248,16 +265,7 @@ func ProjectStructure(prg_type string){
 			RootDirs: []string{},
 			NonRootFiles: []string{},
 			NonRootDirs: []string{},
-			DirectoryFileExtensions: map[string]map[string]bool{
-				"public": {
-					".html":true,
-					".js":true,
-					".css":true,
-				},
-				"src": {
-					".ts":true,
-				},
-			},
+			DirectoryFileExtensions: map[string]map[string]bool{},
 		}
 		// Take input for file structure
 		updatedData := addFilesAndDirs(data)

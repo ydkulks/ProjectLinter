@@ -5,7 +5,6 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	// "strings"
 )
 
 func DirWalk(data DirectoryStructure){
@@ -31,32 +30,17 @@ func DirWalk(data DirectoryStructure){
 	}
 
 	// Regex for file extension validation
-
-	// dirRegex := regexp.MustCompile(`.*[/\\]public[/\\].*`)
-	// allowedExtensions := map[string]bool{
-	// 	".js":  true,
-	// 	".css": true,
-	// 	".html": true,
-	// }
-
-	// ISSUE: Only the last dir is validated
-	var dirs []string
-	var dirRegex *regexp.Regexp
-	var allowedExtensions map[string]bool
-	flag := 0
+	dirRegexMap := make(map[string]*regexp.Regexp)
+	allowedExtensionsMap := make(map[string]map[string]bool)
 	for dir := range data.DirectoryFileExtensions {
-		dirs = append(dirs, dir)
+		dirRegex := regexp.MustCompile(`.*[/\\]` + dir + `[/\\].*`)
+		dirRegexMap[dir] = dirRegex
 
-		// dirRegex := regexp.MustCompile(`.*[/\\]`+dirs[0]+`[/\\].*`)
-		dirRegex = regexp.MustCompile(`.*[/\\]`+dirs[flag]+`[/\\].*`)
-
-		// var allowedExtensions map[string]bool
-		if allowedExtensions == nil {allowedExtensions = make(map[string]bool)}
-		// for i := range data.DirectoryFileExtensions[dirs[0]]{
-		for i := range data.DirectoryFileExtensions[dirs[flag]]{
+		allowedExtensions := make(map[string]bool)
+		for i := range data.DirectoryFileExtensions[dir] {
 			allowedExtensions[i] = true
 		}
-		flag = flag + 1
+		allowedExtensionsMap[dir] = allowedExtensions
 	}
 
 	// Path walk
@@ -116,20 +100,27 @@ func DirWalk(data DirectoryStructure){
 			}
 		}
 
+		// File extension validation
+		if !info.IsDir(){
+			for dir, dirRegex := range dirRegexMap {
+				if dirRegex.MatchString(path) {
+					ext := filepath.Ext(info.Name())
+					if allowedExtensions, ok := allowedExtensionsMap[dir]; ok {
+						if !allowedExtensions[ext] {
+							fmt.Printf("%s File with invalid extension: %q\n", status_bad, path)
+							return nil
+						} else {
+							fmt.Printf("%s Allowed file: %q\n", status_ok, path)
+							return nil
+						}
+					}
+				}
+			}
+		}
+
 		// Other files and directories
 		if info.IsDir() {
 			fmt.Printf("%s Other directory: %q\n",status_q,path)
-		}else if dirRegex.MatchString(path){
-			ext := filepath.Ext(info.Name())
-
-			// Check if the file extension is in the list of allowed extensions
-			if !allowedExtensions[ext] {
-				fmt.Printf("%s File with invalid extension: %q\n", status_bad, path)
-				return nil
-			} else {
-				fmt.Printf("%s Allowed file: %q\n", status_ok, path)
-				return nil
-			}
 		}else if !info.IsDir(){
 			fmt.Printf("%s Other file: %q\n",status_q,path)
 		}
