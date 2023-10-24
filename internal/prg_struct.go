@@ -221,6 +221,7 @@ func ProjectStructure(prg_type string){
 				"cmd/mycli",
 			},
 			DirectoryFileExtensions: map[string]map[string]bool{
+				"cmd":{".go":true},
 				"internal":{".go":true},
 				"pkg":{".go":true},
 			},

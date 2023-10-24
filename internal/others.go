@@ -116,7 +116,7 @@ func addFilesAndDirs(data DirectoryStructure) (DirectoryStructure){
 
 func fileExtensionValidation(data DirectoryStructure){
 	var selectedOption string
-	var selected map[string]map[string]bool
+	selected := data.DirectoryFileExtensions
 
 	// Select operation
 	operationOptions := []string{
@@ -131,23 +131,79 @@ func fileExtensionValidation(data DirectoryStructure){
 	survey.AskOne(prompt,&selectedOption)
 	
 	if selectedOption == "Add"{
-		// for{
-		// 	fmt.Printf("%s Add file or folder "+green+"(m - menu): "+reset,status_q)
-		// 	var userData string
-		// 	_,err := fmt.Scan(&userData)
-		// 	if err != nil {fmt.Println(red + "%s\n" + reset,err)}
-		// 	if userData == "m"{break}else{
-		// 		// data.IgnoreDir = append(data.IgnoreDir, userData)
-		// 		// data.DirectoryFileExtensions = append(data.DirectoryFileExtensions, userData)
-		// 		fmt.Println(data.DirectoryFileExtensions)
-		// 	}
-		// }
-		selected = map[string]map[string]bool{
-			"public":{".json":true,},
+		for {
+			fmt.Println(selected)
+			// Collect directory and extension input from the user
+			var directory, extension string
+			fmt.Printf("%s Enter directory name "+green+"(m - menu): "+reset,status_q)
+			_, err := fmt.Scanf("%s", &directory)
+
+			if err != nil || directory == "m" {
+				break
+			}
+
+			fmt.Printf("%s Enter file extension allowed in %s"+green+"(m - menu): "+reset,status_q,directory)
+			_, err = fmt.Scanf("%s", &extension)
+
+			if err != nil {
+				fmt.Println("Invalid input. Please try again.")
+				continue
+			}
+
+			// Check if the directory already exists in the map
+			if selected[directory] == nil {
+				selected[directory] = make(map[string]bool)
+			}
+
+			// Add the file extension to the directory's map
+			selected[directory][extension] = true
 		}
 		updateJSON_FileExtension(data,selected)
 		return
 	}else if selectedOption == "Delete"{
+
+		var deleteOptions []string
+		for i := range data.DirectoryFileExtensions{
+			deleteOptions = append(deleteOptions, i)
+		}
+
+		deleteOptions = append(deleteOptions, "Quit")
+
+		for {
+			prompt := &survey.Select{
+				Message: "Select Dir: ",
+				Options: deleteOptions,
+			}
+			// Directory to delete
+			survey.AskOne(prompt,&selectedOption)
+
+			if selectedOption == "Quit"{break}
+
+			var deleteOptionValue []string
+			for i:= range selected[selectedOption]{
+				deleteOptionValue = append(deleteOptionValue, i)
+			}
+			deleteOptionValue = append(deleteOptionValue, "Quit")
+			var selectedOption1 string
+			prompt1 := &survey.Select{
+				Message: "Select Extension: ",
+				Options: deleteOptionValue,
+			}
+			// Extension to delete
+			survey.AskOne(prompt1,&selectedOption1)
+			if selectedOption1 == "Quit"{break}
+
+			var temp map[string]bool
+			temp = make(map[string]bool)
+			for i,j := range selected[selectedOption]{
+				if i != selectedOption1{
+					temp[i] = j
+				}
+			}
+			selected[selectedOption] = temp
+
+		}
+
 		updateJSON_FileExtension(data,selected)
 		return
 	}else if selectedOption == "Display"{
