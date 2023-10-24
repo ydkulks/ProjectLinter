@@ -128,7 +128,7 @@ my-neovim-plugin/
   │   ├── mappings.lua   (Key mappings)
   │   ├── utils.lua      (Utility functions)
   ├── doc/               (Documentation for your plugin)
-  ├── tests/             (Test files for your plugin)
+  ├── test/              (Test files for your plugin)
   ├── README.md          (Plugin documentation)
 
 ```
@@ -148,5 +148,5 @@ my-neovim-plugin/
   - [x] Other
 - [x] Sub directory file type validation
 - [x] Restrict file types in a specific directory
-- [ ] Add CLI survey for file extension validation
-- [ ] Make CLI more readable (spaces and colors)
+- [x] Add CLI survey for file extension validation
+- [x] Make CLI more readable (spaces and colors)

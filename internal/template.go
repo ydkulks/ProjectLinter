@@ -54,7 +54,8 @@ func DirWalk(data DirectoryStructure){
 		for i:=0; i <=len(data.RootFiles)-1; i++{
 			if !info.IsDir() && info.Name() == data.RootFiles[i]{
 				if filepath.Dir(path) == Pgr_dir{
-					fmt.Printf("%s Root: %q\n",status_ok,path)
+					// fmt.Printf("%s Root: %q\n",status_ok,path)
+					fmt.Printf("%s Root: "+dark_gray+"%q\n",status_ok,path)
 					return nil
 				}else{
 					fmt.Printf("%s FILE NOT IN ROOT: %q\n",status_bad,path)
@@ -67,7 +68,7 @@ func DirWalk(data DirectoryStructure){
 		for i:=0; i <=len(data.RootDirs)-1; i++{
 			if info.IsDir() && info.Name() == data.RootDirs[i]{
 				if filepath.Dir(path) == Pgr_dir{
-					fmt.Printf("%s Root directory: %q\n",status_ok,path)
+					fmt.Printf("%s Root directory: "+dark_gray+"%q\n",status_ok,path)
 					return nil
 				}else{
 					fmt.Printf("%s FOLDER NOT IN ROOT: %q\n",status_bad,path)
@@ -79,7 +80,7 @@ func DirWalk(data DirectoryStructure){
 		// Ignore directory
 		for i:=0; i <= len(data.IgnoreDir)-1; i++ {
 			if info.IsDir() && info.Name() == data.IgnoreDir[i] {
-				fmt.Printf("%s Skipped directory: %q\n",status_ignore,path)
+				fmt.Printf("%s Skipped directory: "+dark_gray+"%q\n",status_ignore,path)
 				return filepath.SkipDir
 			}
 		}
@@ -87,7 +88,7 @@ func DirWalk(data DirectoryStructure){
 		// File validation
 		for _, re := range fileRegexPatterns{
 			if re != nil && re.MatchString(path){
-				fmt.Printf("%s File: %q\n",status_ok,path)
+				fmt.Printf("%s File: "+dark_gray+"%q\n",status_ok,path)
 				return nil
 			}
 		}
@@ -95,7 +96,7 @@ func DirWalk(data DirectoryStructure){
 		// Dir validation
 		for _, re := range dirRegexPatterns{
 			if re != nil && re.MatchString(path){
-				fmt.Printf("%s Directory: %q\n",status_ok,path)
+				fmt.Printf("%s Directory: "+dark_gray+"%q\n",status_ok,path)
 				return nil
 			}
 		}
@@ -107,10 +108,10 @@ func DirWalk(data DirectoryStructure){
 					ext := filepath.Ext(info.Name())
 					if allowedExtensions, ok := allowedExtensionsMap[dir]; ok {
 						if !allowedExtensions[ext] {
-							fmt.Printf("%s File with invalid extension: %q\n", status_bad, path)
+							fmt.Printf("%s File with invalid extension: "+red+"%q\n", status_bad, path)
 							return nil
 						} else {
-							fmt.Printf("%s Allowed file: %q\n", status_ok, path)
+							fmt.Printf("%s Allowed file: "+dark_gray+"%q\n", status_ok, path)
 							return nil
 						}
 					}
@@ -120,9 +121,9 @@ func DirWalk(data DirectoryStructure){
 
 		// Other files and directories
 		if info.IsDir() {
-			fmt.Printf("%s Other directory: %q\n",status_q,path)
+			fmt.Printf("%s Other directory: "+medium_gray+"%q\n",status_q,path)
 		}else if !info.IsDir(){
-			fmt.Printf("%s Other file: %q\n",status_q,path)
+			fmt.Printf("%s Other file: "+medium_gray+"%q\n",status_q,path)
 		}
 		return nil
 	})

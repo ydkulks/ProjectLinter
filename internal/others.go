@@ -135,14 +135,14 @@ func fileExtensionValidation(data DirectoryStructure){
 			fmt.Println(selected)
 			// Collect directory and extension input from the user
 			var directory, extension string
-			fmt.Printf("%s Enter directory name "+green+"(m - menu): "+reset,status_q)
+			fmt.Printf("%s Enter directory name "+dark_gray+"(m - menu): "+reset,status_q)
 			_, err := fmt.Scanf("%s", &directory)
 
 			if err != nil || directory == "m" {
 				break
 			}
 
-			fmt.Printf("%s Enter file extension allowed in %s"+green+"(m - menu): "+reset,status_q,directory)
+			fmt.Printf("%s Enter file extension allowed in %s "+dark_gray+"(m - menu): "+reset,status_q,directory)
 			_, err = fmt.Scanf("%s", &extension)
 
 			if err != nil {
@@ -200,7 +200,13 @@ func fileExtensionValidation(data DirectoryStructure){
 					temp[i] = j
 				}
 			}
-			selected[selectedOption] = temp
+
+			// Delete key if no value found. Else store the key and value
+			if len(temp) == 0 {
+				delete(selected, selectedOption)
+			} else {
+				selected[selectedOption] = temp
+			}
 
 		}
 

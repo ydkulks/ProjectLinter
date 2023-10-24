@@ -22,6 +22,8 @@ var(
   blue = "\033[34m"
   yellow = "\033[33m"
   red = "\033[31m"
+  dark_gray = "\033[38;2;100;100;100m"
+  medium_gray = "\033[38;2;150;150;150m"
   reset = "\033[0m"
   
   // Symbols and its color
@@ -244,16 +246,20 @@ func ProjectStructure(prg_type string){
 				"plugin",
 				"lua",
 				"doc",
-				"tests",
+				"test",
 			},
 			NonRootFiles: []string{
 				"lua/commands.lua",
 				"lua/mappings.lua",
 				"lua/utils.lua",
+				"doc/tags",
 			},
 			NonRootDirs: []string{},
 			DirectoryFileExtensions: map[string]map[string]bool{
 				"lua":{".lua":true},
+				"plugin":{".lua":true},
+				"test":{".lua":true},
+				"doc":{".txt":true},
 			},
 		}
 		DirWalk(data)
