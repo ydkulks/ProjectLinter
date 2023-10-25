@@ -258,7 +258,7 @@ func updateJSON(data DirectoryStructure, selectedOption string, selectedSlice []
 		fmt.Println(red + "%s\n" + reset, err)
 	}
 
-	fmt.Println(green + "Updated and saved" + reset)
+	fmt.Println(green + "\nUpdated and saved" + reset)
 	fmt.Println(data)
 }
 
@@ -291,6 +291,6 @@ func updateJSON_FileExtension(data DirectoryStructure, selectedSlice map[string]
 		fmt.Println(red + "%s\n" + reset, err)
 	}
 
-	fmt.Println(green + "Updated and saved" + reset)
+	fmt.Println(green + "\nUpdated and saved" + reset)
 	fmt.Println(data)
 }

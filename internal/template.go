@@ -43,6 +43,12 @@ func DirWalk(data DirectoryStructure){
 		allowedExtensionsMap[dir] = allowedExtensions
 	}
 
+	// Title
+	fmt.Print("\n")
+	fmt.Print(yellow + "     PROJECT LINTER" + reset)
+	fmt.Print("\n")
+	fmt.Print("\n")
+
 	// Path walk
 	error := filepath.Walk(Pgr_dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -54,8 +60,7 @@ func DirWalk(data DirectoryStructure){
 		for i:=0; i <=len(data.RootFiles)-1; i++{
 			if !info.IsDir() && info.Name() == data.RootFiles[i]{
 				if filepath.Dir(path) == Pgr_dir{
-					// fmt.Printf("%s Root: %q\n",status_ok,path)
-					fmt.Printf("%s Root: "+dark_gray+"%q\n",status_ok,path)
+					fmt.Printf("%s Root files: "+dark_gray+"%q\n",status_ok,path)
 					return nil
 				}else{
 					fmt.Printf("%s FILE NOT IN ROOT: %q\n",status_bad,path)
