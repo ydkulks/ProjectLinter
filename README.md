@@ -4,9 +4,108 @@ CLI tool that monitors and evaluates the file structure of a directory and its
 subdirectories to enforce a specific file structure pattern for a particular
 programming language
 
+## Demo
+
+### Default Templates
+
+<video controls loop autoplay>
+  <source src="assets/Ubuntu 20.04 on Windows 2023-10-29 18-38-29.mp4">
+</video>
+
+### Custom Template
+
+📄 Note: The `structure.json` file should be placed in the project directory.
+
+<video controls loop autoplay>
+  <source src="assets/Ubuntu 20.04 on Windows 2023-10-29 19-39-00.mp4">
+</video>
+
+<details>
+
+<summary>
+  Example structure.json file
+</summary>
+
+```json
+// structure.json
+{
+	"IgnoreDir": {
+		".git",
+		"node_modules",
+		".next",
+	},
+	"RootFiles": {
+		"package.json",
+		"package-lock.json",
+		"tailwind.config.js",
+		"tailwind.config.ts",
+		"tsconfig.json",
+		"tslint.json",
+		"webpack.config.js",
+		"yarn.lock",
+		"postcss.config.js",
+		".eslintrc.json",
+		"LICENSE",
+		"README.md",
+		"CODE_OF_CONDUCT.md",
+		".env",
+		".env.local",
+		".gitignore",
+		"app.js",
+	},
+	"RootDirs": {
+		"public",
+		"src",
+		"tests",
+		"config",
+		"typings",
+	},
+	"NonRootFiles": {
+		// JS
+		"config/database.js",
+		"config/routes.js",
+		"config/environment.js",
+		// TS
+		"config/constants.ts",
+		"config/routes.ts",
+	},
+	"NonRootDirs": {
+		// JS
+		"src/controllers",
+		"src/models",
+		"src/routes",
+		"src/views",
+		// TS
+		"src/components",
+		"src/containers",
+		"src/services",
+		"src/styles",
+		"src/assets",
+		"config/env",
+		"config/",
+	},
+	"DirectoryFileExtensions": {
+		"public": {
+			".html":true,
+			".js":true,
+			".css":true,
+		},
+		"src": {
+			".ts":true,
+		},
+	},
+}
+```
+
+</details>
+
 ## Project structure
 
-### Javascript and Typescript (node.js)
+<details>
+
+<summary>
+  Javascript and Typescript (node.js)
+</summary>
 
 ```txt
 my-node-app/
@@ -55,7 +154,13 @@ my-typescript-project/
 
 ```
 
-### Go (Web app)
+</details>
+
+<details>
+
+<summary>
+ Go (Web app)
+</summary>
 
 ```txt
 my-go-web-app/
@@ -77,7 +182,12 @@ my-go-web-app/
 
 ```
 
-### Go (CLI)
+</details>
+
+<details>
+<summary>
+ Go (CLI)
+</summary>
 
 ```txt
 my-go-cli/
@@ -94,7 +204,13 @@ my-go-cli/
 
 ```
 
-### PHP (Web app)
+</details>
+
+<details>
+
+<summary>
+ PHP (Web app)
+</summary>
 
 ```txt
 my-php-web-app/
@@ -117,7 +233,13 @@ my-php-web-app/
 
 ```
 
-### Lua (Neovim plugin)
+</details>
+
+<details>
+
+<summary>
+ Lua (Neovim plugin)
+</summary>
 
 ```txt
 my-neovim-plugin/
@@ -132,6 +254,8 @@ my-neovim-plugin/
   ├── README.md          (Plugin documentation)
 
 ```
+
+</details>
 
 ## Todo
 
@@ -150,3 +274,5 @@ my-neovim-plugin/
 - [x] Restrict file types in a specific directory
 - [x] Add CLI survey for file extension validation
 - [x] Make CLI more readable (spaces and colors)
+- [ ] Documentation
+  - [ ] README
