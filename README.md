@@ -10,17 +10,13 @@ programming language
 
 ### Default Templates
 
-<video controls loop autoplay>
-  <source src="https://github.com/ydkulks/ProjectLinter/assets/56758248/80f00496-ba0d-47b9-9bac-9c5df50eaece">
-</video>
+https://github.com/ydkulks/ProjectLinter/assets/56758248/80f00496-ba0d-47b9-9bac-9c5df50eaece
 
 ### Custom Template
 
 📄 Note: The `structure.json` file should be placed in the project directory.
 
-<video controls loop autoplay>
-  <source src="https://github.com/ydkulks/ProjectLinter/assets/56758248/6a76f38a-140e-494a-9427-b200d98f1e85">
-</video>
+https://github.com/ydkulks/ProjectLinter/assets/56758248/6a76f38a-140e-494a-9427-b200d98f1e85
 
 <details>
 
