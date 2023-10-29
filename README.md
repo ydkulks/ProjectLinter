@@ -1,5 +1,7 @@
 # ProjectLinter
 
+![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
+
 CLI tool that monitors and evaluates the file structure of a directory and its
 subdirectories to enforce a specific file structure pattern for a particular
 programming language
@@ -9,7 +11,7 @@ programming language
 ### Default Templates
 
 <video controls loop autoplay>
-  <source src="assets/Ubuntu 20.04 on Windows 2023-10-29 18-38-29.mp4">
+  <source src="https://github.com/ydkulks/ProjectLinter/assets/56758248/80f00496-ba0d-47b9-9bac-9c5df50eaece">
 </video>
 
 ### Custom Template
@@ -17,7 +19,7 @@ programming language
 📄 Note: The `structure.json` file should be placed in the project directory.
 
 <video controls loop autoplay>
-  <source src="assets/Ubuntu 20.04 on Windows 2023-10-29 19-39-00.mp4">
+  <source src="https://github.com/ydkulks/ProjectLinter/assets/56758248/6a76f38a-140e-494a-9427-b200d98f1e85">
 </video>
 
 <details>
