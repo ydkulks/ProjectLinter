@@ -11,11 +11,11 @@ import (
 func addFilesAndDirs(data DirectoryStructure) (DirectoryStructure){
 	// Store the data in a file for later use
 	// Check if save file exists or not
-	if _,err := os.Stat("structure.json"); os.IsNotExist(err){
+	if _,err := os.Stat(Pgr_dir + "/structure.json"); os.IsNotExist(err){
 		fmt.Println(red + "save file does not exist" + reset)
 	}else{
 		// fmt.Println("save file exist")
-		file, err := os.Open("structure.json")
+		file, err := os.Open(Pgr_dir + "/structure.json")
 		if err != nil {fmt.Printf(red + "%s\n" + reset, err)}
 		defer file.Close()
 

@@ -272,5 +272,6 @@ my-neovim-plugin/
 - [x] Restrict file types in a specific directory
 - [x] Add CLI survey for file extension validation
 - [x] Make CLI more readable (spaces and colors)
-- [ ] Documentation
-  - [ ] README
+- [x] Documentation
+  - [x] README
+- [ ] Golang executables for different platforms
