@@ -274,5 +274,6 @@ my-neovim-plugin/
 - [x] Make CLI more readable (spaces and colors)
 - [x] Documentation
   - [x] README
+  - [x] Man page
 - [x] Golang executables for different platforms
 - [x] First release (compressed file and compiled program)
